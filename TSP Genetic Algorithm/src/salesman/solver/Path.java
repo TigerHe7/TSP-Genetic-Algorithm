@@ -5,29 +5,23 @@ import java.util.LinkedList;
 
 /**
  * Path of points in the order that they're visited
- *
- * @author Tiger He
  */
 public class Path implements Comparable<Path> {
 
     // points in path
-    int numPoints;
+    int nPoints;
     LinkedList<Point> points;
 
-    // distance to travel through path.
+    // length of path.
     private double distance;
 
-    // fitness to reproduce inversely proportional to distance
+    // repre fitness inv prop to distance
     private double fitness;
 
-    /**
-     * Create empty path
-     *
-     * @param numPoints number of points
-     */
+    // empty path
     Path(int numPoints) {
 
-        this.numPoints = numPoints;
+        this.nPoints = numPoints;
 
         this.points = new LinkedList<>();
         for (int i = 0; i < numPoints; i++) {
@@ -38,72 +32,39 @@ public class Path implements Comparable<Path> {
         fitness = 0;
     }
 
-    /**
-     * Create shuffled version of all points
-     *
-     * @param space all points to include
-     */
+    // path from shuffled version of all points in space
     Path(Space space) {
-
-        this.numPoints = space.size;
-
+        this.nPoints = space.size;
         this.points = new LinkedList<>(space.points);
         Collections.shuffle(points);
-
         calcDistance();
-        calcFitness();
+        fitness = 1 / this.distance;
     }
 
-    /**
-     * Create copy of current path
-     *
-     * @param path original path
-     */
+    // copy of current path
     Path(Path path) {
-
-        this.numPoints = path.numPoints;
-
+        this.nPoints = path.nPoints;
         this.points = new LinkedList<>(path.points);
-
-        calcDistance();
-        calcFitness();
+        this.distance = path.distance;
+        this.fitness = path.fitness;
     }
 
-    /**
-     * Check if point exists in path
-     *
-     * @param p point being searched for
-     * @return if point exists
-     */
+    // check if path contains point
     public boolean contains(Point p) {
         return points.contains(p);
     }
 
-    /**
-     * Get point at given index
-     *
-     * @param i index of point
-     * @return point at index
-     */
+    // get point at index 
     public Point get(int i) {
         return points.get(i);
     }
 
-    /**
-     * Replace point at given index
-     *
-     * @param i index of point
-     * @param p replacement point
-     */
+    // set point at index
     public void set(int i, Point p) {
         points.set(i, p);
     }
 
-    /**
-     * Return distance between path points
-     *
-     * @return distance
-     */
+    // return distance
     public double getDistance() {
         if (distance == 0) {
             calcDistance();
@@ -111,36 +72,23 @@ public class Path implements Comparable<Path> {
         return distance;
     }
 
-    /**
-     * Calculate distance between all points
-     */
+    // calc distance
     private void calcDistance() {
+        assert this.nPoints >= 3;
         distance = 0;
 
-        for (int i = 0; i < numPoints - 2; i++) {
+        for (int i = 0; i < nPoints - 2; i++) {
             this.distance += points.get(i).distTo(points.get(i + 1));
         }
-
-        this.distance += points.get(numPoints - 1).distTo(points.get(0));
+        this.distance += points.get(nPoints - 1).distTo(points.get(0));
     }
 
-    /**
-     * Get fitness of path
-     *
-     * @return fitness
-     */
+    // get fitness of class
     public double getFitness() {
         if (fitness == 0) {
-            calcFitness();
+            this.fitness = 1 / getDistance();
         }
         return fitness;
-    }
-
-    /**
-     * Calculate fitness of path
-     */
-    private void calcFitness() {
-        fitness = 1 / getDistance();
     }
 
     /** 
@@ -159,13 +107,12 @@ public class Path implements Comparable<Path> {
      */
     @Override
     public int compareTo(Path p) {
-        if (this.getFitness() < p.getFitness()) {
+        if (this.getFitness() < p.getFitness()) 
             return -1;
-        } else if (this.getFitness() > p.getFitness()) {
+        else if (this.getFitness() > p.getFitness()) 
             return 1;
-        } else {
+        else 
             return 0;
-        }
     }
 
     /*
@@ -173,7 +120,7 @@ public class Path implements Comparable<Path> {
      LinkedList<Point> newPoints = new LinkedList<>();
      int pos;
 
-     for (int i = 0; i < this.numPoints; i++) {
+     for (int i = 0; i < this.nPoints; i++) {
      pos = (int) (Math.random() * (this.points.size()));
      newPoints.add(this.points.get(pos));
      this.points.remove(pos);

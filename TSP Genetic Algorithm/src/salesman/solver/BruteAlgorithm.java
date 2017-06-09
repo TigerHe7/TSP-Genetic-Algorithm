@@ -61,12 +61,12 @@ public class BruteAlgorithm {
         } else {
             Path bestPath = new Path(path);
             double bestDistance = path.getDistance();
-            Point pointHolder = path.get(path.numPoints - layer);
+            Point pointHolder = path.get(path.nPoints - layer);
             Path newPath;
 
-            for (int i = path.numPoints - layer; i < path.numPoints; i++) {
+            for (int i = path.nPoints - layer; i < path.nPoints; i++) {
                 newPath = new Path(path);
-                newPath.set(path.numPoints + 1 - layer, path.get(i));
+                newPath.set(path.nPoints + 1 - layer, path.get(i));
                 newPath.set(i, pointHolder);
                 newPath = nextPath(newPath, layer - 1);
                 if (newPath.getDistance() < bestDistance) {

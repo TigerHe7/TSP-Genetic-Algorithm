@@ -1,39 +1,25 @@
 package salesman.solver;
 
-/**
- * Get the shortest path using a genetic algorithms based on the evolution
- * of a population
- *
- * @author Tiger He
- */
 public class GeneticAlgorithm {
 
-    // Preserving the best paths
-    // (true and 1 tend to produce best result)
-    private static final boolean BEST_PRESERVE = true;
-    private static final int NUM_PRESERVE = 1;
+    // Preserve the best path
+    private static final boolean PRES_BEST = true;
+    private static final int PRES_NUM = 1;
 
-    // Mutating all paths
-    // (low mutation tends to produce the best result)
-    private static final double RATE_MUTATION = 0.0001;
+    // Mutate paths
+    private static final double MUTATE_PROB = 0.0001;
 
     // Number of paths which compete to mate
-    private static final int NUM_PATHS_COMPETE = 5;
+    private static final int COMPETE_NUM = 5;
 
-    /**
-     * Evolve a population to create the consecutive generation
-     *
-     * @param population population being evolved
-     * @return evolved population
-     */
     public static Population evolvePop(Population population) {
 
         // the second generation population
         Population secondGen = new Population(population.numPaths);
 
         // add the best individual unchanged to next generation
-        if (BEST_PRESERVE) {
-            for (int i = 0; i < NUM_PRESERVE; i++) {
+        if (PRES_BEST) {
+            for (int i = 0; i < PRES_NUM; i++) {
                 secondGen.set(i, population.getFittest());
             }
         }
@@ -55,7 +41,7 @@ public class GeneticAlgorithm {
      * @param secondGen second generation population
      */
     private static void mate(Population population, Population secondGen) {
-        for (int i = NUM_PRESERVE; i < population.numPaths; i++) {
+        for (int i = PRES_NUM; i < population.numPaths; i++) {
 
             // get parents by competing random groups of paths from 
             // original population and allowing those with the best 
@@ -76,7 +62,7 @@ public class GeneticAlgorithm {
      * @param secondGen population
      */
     private static void mutate(Population secondGen) {
-        for (int i = NUM_PRESERVE; i < secondGen.numPaths; i++) {
+        for (int i = PRES_NUM; i < secondGen.numPaths; i++) {
             mutate(secondGen.get(i));
         }
     }
@@ -91,11 +77,11 @@ public class GeneticAlgorithm {
     private static Path crossover(Path parent1, Path parent2) {
 
         // offspring path
-        Path offspring = new Path(parent1.numPoints);
+        Path offspring = new Path(parent1.nPoints);
 
         // generate random subpath
-        int startPos = (int) (Math.random() * parent1.numPoints);
-        int endPos = (int) (Math.random() * parent1.numPoints);
+        int startPos = (int) (Math.random() * parent1.nPoints);
+        int endPos = (int) (Math.random() * parent1.nPoints);
         if (startPos > endPos) {
             int holder;
             holder = startPos;
@@ -104,14 +90,14 @@ public class GeneticAlgorithm {
         }
 
         // give subpath of parent1 to offspring
-        for (int i = 0; i < parent1.numPoints; i++) {
+        for (int i = 0; i < parent1.nPoints; i++) {
             if (i > startPos && i < endPos) {
                 offspring.set(i, parent1.get(i));
             }
         }
 
         // use parent2 to fill in the missing points
-        for (int i = 0; i < parent2.numPoints; i++) {
+        for (int i = 0; i < parent2.nPoints; i++) {
             if (!offspring.contains(parent2.get(i))) {
                 for (int j = 0; j < offspring.points.size(); j++) {
                     if (offspring.get(j) == null) {
@@ -133,13 +119,13 @@ public class GeneticAlgorithm {
     private static void mutate(Path path) {
 
         // repreat for each point
-        for (int pointPos1 = 0; pointPos1 < path.numPoints; pointPos1++) {
+        for (int pointPos1 = 0; pointPos1 < path.nPoints; pointPos1++) {
 
             // switch with random point if mutation occurs by chance
-            if (Math.random() < RATE_MUTATION) {
+            if (Math.random() < MUTATE_PROB) {
 
                 // get random point
-                int pointPos2 = (int) (path.numPoints * Math.random());
+                int pointPos2 = (int) (path.nPoints * Math.random());
 
                 // switch points
                 Point point1 = path.get(pointPos1);
@@ -159,10 +145,10 @@ public class GeneticAlgorithm {
     private static Path compete(Population population) {
 
         // new smaller population of competing paths
-        Population newPop = new Population(NUM_PATHS_COMPETE);
+        Population newPop = new Population(COMPETE_NUM);
 
         // add random paths
-        for (int i = 0; i < NUM_PATHS_COMPETE; i++) {
+        for (int i = 0; i < COMPETE_NUM; i++) {
             int rand = (int) (Math.random() * population.numPaths);
             newPop.set(i, population.get(rand));
         }

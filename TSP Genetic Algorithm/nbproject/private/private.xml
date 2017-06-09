@@ -3,8 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Tiger/Google%20Drive/Netbeans/Salesman%20Solver/src/salesman/solver/GeneticAlgorithm.java</file>
-            <file>file:/C:/Users/Tiger/Google%20Drive/Netbeans/Salesman%20Solver/src/salesman/solver/TSP.java</file>
+            <file>file:/C:/Users/Tiger/Documents/GitHub/TSP-Genetic-Algorithm/TSP%20Genetic%20Algorithm/src/salesman/solver/DisplayScreen.java</file>
+            <file>file:/C:/Users/Tiger/Documents/GitHub/TSP-Genetic-Algorithm/TSP%20Genetic%20Algorithm/src/salesman/solver/BruteAlgorithm.java</file>
+            <file>file:/C:/Users/Tiger/Documents/GitHub/TSP-Genetic-Algorithm/TSP%20Genetic%20Algorithm/src/salesman/solver/TSP.java</file>
+            <file>file:/C:/Users/Tiger/Documents/GitHub/TSP-Genetic-Algorithm/TSP%20Genetic%20Algorithm/src/salesman/solver/GeneticAlgorithm.java</file>
+            <file>file:/C:/Users/Tiger/Documents/GitHub/TSP-Genetic-Algorithm/TSP%20Genetic%20Algorithm/src/salesman/solver/Point.java</file>
+            <file>file:/C:/Users/Tiger/Documents/GitHub/TSP-Genetic-Algorithm/TSP%20Genetic%20Algorithm/src/salesman/solver/Path.java</file>
         </group>
     </open-files>
 </project-private>

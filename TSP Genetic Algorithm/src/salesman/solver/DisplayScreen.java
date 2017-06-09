@@ -69,16 +69,16 @@ public class DisplayScreen extends JPanel {
         // draw first point in space as red
         if (allPoints.size() > 0) {
             g.setColor(Color.red);
-            x = (int) Math.round(allPoints.get(0).x);
-            y = (int) Math.round(allPoints.get(0).y);
+            x = (int) Math.round(allPoints.get(0).getX());
+            y = (int) Math.round(allPoints.get(0).getY());
             g.fillOval(x - 2, y - 2, 5, 5);
         }
 
         // draw rest of points in space as black
         g.setColor(Color.black);
         for (int i = 0; i < allPoints.size(); i++) {
-            x = (int) Math.round(allPoints.get(i).x);
-            y = (int) Math.round(allPoints.get(i).y);
+            x = (int) Math.round(allPoints.get(i).getX());
+            y = (int) Math.round(allPoints.get(i).getY());
             g.drawOval(x - 2, y - 2, 5, 5);
         }
     }
@@ -98,19 +98,19 @@ public class DisplayScreen extends JPanel {
 
         // draw lines between each consecutive point in pathway to depict path
         for (int i = 0; i < pathway.size() - 1; i++) {
-            x = (int) Math.round(pathway.get(i).x);
-            y = (int) Math.round(pathway.get(i).y);
-            x2 = (int) Math.round(pathway.get(i + 1).x);
-            y2 = (int) Math.round(pathway.get(i + 1).y);
+            x = (int) Math.round(pathway.get(i).getX());
+            y = (int) Math.round(pathway.get(i).getY());
+            x2 = (int) Math.round(pathway.get(i + 1).getX());
+            y2 = (int) Math.round(pathway.get(i + 1).getY());
             g.drawLine(x, y, x2, y2);
         }
 
         // draw line from last point in pathway to first point
         if (pathway.size() > 0) {
-            x = (int) Math.round(pathway.get(pathway.size() - 1).x);
-            y = (int) Math.round(pathway.get(pathway.size() - 1).y);
-            x2 = (int) Math.round(pathway.get(0).x);
-            y2 = (int) Math.round(pathway.get(0).y);
+            x = (int) Math.round(pathway.get(pathway.size() - 1).getX());
+            y = (int) Math.round(pathway.get(pathway.size() - 1).getY());
+            x2 = (int) Math.round(pathway.get(0).getX());
+            y2 = (int) Math.round(pathway.get(0).getY());
             g.drawLine(x, y, x2, y2);
         }
     }

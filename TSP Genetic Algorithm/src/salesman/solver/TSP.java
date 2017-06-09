@@ -15,11 +15,11 @@ import javax.swing.JFrame;
 public class TSP extends JFrame {
 
     // scenario settings
-    public static final int NUM_PATHWAYS = 200;
-    public static final int NUM_POINTS = 100;
+    public static final int NUM_PATHWAYS = 20;
+    public static final int NUM_POINTS = 15;
 
     // very important: (higher value tends to improve shortest path)
-    public static final int NUM_GENETIC_GENERATIONS = 1000;
+    public static final int NUM_GENETIC_GENERATIONS = 100000;
 
     // times bogo generates and compares a new random path
     public static final int NUM_BOGO_TRIES = 100000;
